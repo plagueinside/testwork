@@ -1,0 +1,73 @@
+<div class="body">
+    <div class="head">
+        <p class="right">Hello, {{this.username}}. <a [routerLink]="['/login']">Logout</a></p>
+    </div>
+
+    <div class="example-container mat-elevation-z8">
+        <div class="example-header">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </div>
+        
+        <mat-table #table [dataSource]="dataSource">
+                
+                    <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+                <mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null"
+                                [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+                
+                    <!-- Position Column -->
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+                
+                    <!-- Name Column -->
+            <ng-container matColumnDef="type">
+                <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+            </ng-container>
+                
+                    <!-- Weight Column -->
+            <ng-container matColumnDef="age">
+                <mat-header-cell *matHeaderCellDef> Age </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.age}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actionsColumn">
+                <mat-header-cell *matHeaderCellDef>
+                    <button mat-icon-button color="accent" (click)="addElement()"><i class="fa fa-plus mat-icon"></i></button>
+                    <button *ngIf="(this.selection.selected.length>0)" mat-icon-button color="primary" focusable="false" (click)="delete()">
+                        <i class="fa fa-times mat-icon"></i>
+                    </button>
+                    <button *ngIf="(this.selection.selected.length === 1)" mat-icon-button color="primary" focusable="false" (click)="edit()">
+                        <i class="fa fa-pencil mat-icon"></i>
+                    </button>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                </mat-cell>
+            </ng-container>
+                
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"
+                        (click)="selection.toggle(row)">
+                </mat-row>
+        </mat-table>
+        <mat-paginator #paginator
+                  [pageSize]="5"
+                  [pageSizeOptions]="[5, 10]">
+        </mat-paginator>
+    </div>
+</div>

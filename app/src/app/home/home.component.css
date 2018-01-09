@@ -1,0 +1,48 @@
+/* Structure */
+
+.body {
+    min-height: 100vh;
+    height: 100%;
+    background: lightgray;
+	font-family: Helvetica;
+  -webkit-font-smoothing: antialiased;
+}
+
+.head{
+    padding: 1.5em 5em;
+}
+
+.example-container {
+    margin: 4em 21em;
+    flex-direction: column;
+    max-height: 400px;
+    min-width: 300px;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+  }
+
+  .mat-form-field {
+    font-size: 18px;
+    width: 100%;
+  }
+
+  .mat-column-select {
+    overflow: visible;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 400px;
+  }
+
+  .left{
+    float:left;
+  }
+
+  .right{
+    margin-top:20px;
+    float:right;
+  }

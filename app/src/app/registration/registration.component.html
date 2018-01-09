@@ -1,0 +1,74 @@
+<div class="body">
+<form name="registration">
+  <div *ngIf=this.error class="group danger-block">{{this.error}}</div>
+  <div class="group">
+    <input type="email" 
+      name="email"
+      autocomplete="off" 
+      [(ngModel)]="user.email" 
+      [class.used]="user.email !== '' " 
+      #mail="ngModel"
+      (focus)="this.temp = true;this.error=null" 
+      (keyup)="emailValidator(mail.value) == false ? emailValid = false : emailValid= true"
+      (blur)="checkEmail(mail.value)"
+      ><span class="highlight"></span><span class="bar"></span>
+    <label>Email</label>
+    <div [hidden]="emailValid || mail.pristine || user.email === ''" class="alert-danger">Email address is invalid</div>
+    <div [hidden]="(this.temp === undefined ? true : this.temp)" class="alert-danger">Write another Email </div>
+  </div>
+
+  <div class="group">
+    <input type="text" 
+      (focus)="this.error=null" 
+      name="firstname" 
+      [(ngModel)]="user.firstname" 
+      [class.used]="this.user.firstname !== '' "
+      ><span class="highlight"></span><span class="bar"></span>
+    <label>First Name</label>
+  </div>
+
+  <div class="group">
+    <input type="text" 
+      (focus)="this.error=null" 
+      name="surname" 
+      [(ngModel)]="user.surname" 
+      [class.used]="this.user.surname !== '' "
+      ><span class="highlight"></span><span class="bar"></span>
+    <label>Surname</label>
+  </div>
+
+  <div class="group">
+    <input type="text"  
+      (focus)="this.error=null" 
+      name="date" 
+      onfocus="(this.type='date')" 
+      min="1900-01-01" 
+      max="2013-12-31" 
+      onblur="(this.type='text')" 
+      [(ngModel)]="user.date" 
+      [class.used]="this.user.date !== '' "
+      ><span class="highlight"></span><span class="bar"></span>
+    <label>Choose a date</label>
+  </div>
+
+  <div class="group">
+    <input type="password" 
+      name="password" 
+      [(ngModel)]="user.password" 
+      [class.used]="this.user.password !== '' "
+      #pass="ngModel"
+      (focus)="passValid = true;this.error=null"
+      (blur)="passwordValidator(pass.value) == false ? passValid = false : passValid = true"
+      ><span class="highlight"></span><span class="bar"></span>
+    <div [hidden]="passValid || pass.pristine || user.password === ''" class="alert-danger">Incorrect password</div>
+    <label>Password</label>
+  </div>
+
+  <button *ngIf="!loading()" type="button" class="button buttonBlue" (click)="submit();">Register
+    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+  </button>
+  <div class="loading-block">
+    <img *ngIf="loading()" [src]="this.path">
+  </div>
+</form>
+</div>

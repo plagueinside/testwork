@@ -1,0 +1,32 @@
+<div class="body">
+  <form name="signIn">
+    <div *ngIf=this.error class="group danger-block">{{this.error}}</div>
+    <div class="group">
+      <input type="email" 
+        name="email" 
+        [(ngModel)]="mail"
+        autocomplete="off" 
+        [class.used]="mail !== '' " 
+        #email="ngModel"
+        (focus)="this.error=''" 
+        (keyup)="emailValidator(email.value) == false ? emailValid = false : emailValid= true"
+        ><span class="highlight"></span><span class="bar"></span>
+      <label>Email</label>
+      <div [hidden]="emailValid || email.pristine || mail === ''" class="alert-danger">Email address is invalid</div>
+    </div>
+    <div class="group">
+      <input type="password" name="password" [(ngModel)]="pass" 
+        [class.used]="this.pass !== '' " (focus)="this.error=''" >
+      <span class="highlight"></span><span class="bar"></span>
+      <label>Password</label>
+    </div>
+    <button *ngIf="!loading()" type="button" (click)="login()" class="button buttonBlue">Subscribe
+      <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+    </button>
+    <div class="loading-block">
+      <img *ngIf="loading()" [src]="this.path">
+    </div>
+    <a [routerLink]="['/change-password']">Forgot a password?</a>
+    <a [routerLink]="['/registration']">Register</a>
+  </form>
+</div>

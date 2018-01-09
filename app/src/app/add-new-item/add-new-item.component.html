@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Hi, enter new entry values.</h1>
+<div mat-dialog-content>
+  <p>Name</p>
+  <mat-form-field>
+    <input matInput tabindex="1" [(ngModel)]="data.name">
+  </mat-form-field>
+  <p>Type</p>
+  <mat-form-field>
+    <input matInput tabindex="2" [(ngModel)]="data.type">
+  </mat-form-field>
+  <p>Age</p>
+  <mat-form-field>
+    <input matInput tabindex="3" [(ngModel)]="data.age">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Confirm</button>
+</div>
